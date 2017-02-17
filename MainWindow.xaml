@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Suiren"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" SizeChanged="Window_SizeChanged"
+        >
     <Window.Resources>
         <!-- Default Style -->
         <Style TargetType="StatusBar">
@@ -22,17 +23,33 @@
     </Window.Resources>
     <DockPanel>
         <Menu x:Name="menu" DockPanel.Dock="Top">
-            <MenuItem Header="ファイル">
+            <MenuItem Header="タイムライン">
                 <MenuItem Header="ホーム" x:Name="homeTimelineMenu" Click="homeTimelineMenu_Click"></MenuItem>
             </MenuItem>
-            <MenuItem Header="認証" x:Name="authMenu" Click="authMenu_Click"></MenuItem>
+            <MenuItem Header="認証" x:Name="authMenu">
+                <MenuItem Header="認証する" Click="authMenu_Click" ></MenuItem>
+                <MenuItem Header="認証済み:0" x:Name="authorizedCountMenu"></MenuItem>
+            </MenuItem>
         </Menu>
         <StatusBar x:Name="statusBar" DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="statusBarText"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem>
+                <ProgressBar x:Name="statusProgressBar" Visibility="Hidden"></ProgressBar>
+            </StatusBarItem>
         </StatusBar>
         <TabControl x:Name="tabControl">
             <TabItem Header="基本">
-                <ItemsControl x:Name="panesControll" Style="{StaticResource PanesControllStyle}">
-                </ItemsControl>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl x:Name="panesControll" Style="{StaticResource PanesControllStyle}" Margin="0,0,0,0.2" Width="auto">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </DockPanel>

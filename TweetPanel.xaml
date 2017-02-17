@@ -7,10 +7,19 @@
       mc:Ignorable="d" 
       d:DesignHeight="300"
       >
-
-    <DockPanel Width="400">
-        <Image DockPanel.Dock="Left" Width="100" Height="100" Source="{Binding IconUrl}" />
-        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="{Binding UserNameAndScreenName}"></TextBlock>
-        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="{Binding Text}"></TextBlock>
-    </DockPanel>
+    <Border BorderBrush="Black" BorderThickness="1">
+        <DockPanel Width="400">
+            <Grid DockPanel.Dock="Left" Width="80" Height="80">
+                <Image Width="80" Height="80" Source="{Binding IconUrl}" />
+                <!-- リツイートの時表示 -->
+                <Border x:Name="RetweetUserIconBorder" BorderThickness="1" BorderBrush="Black" Width="40" Height="40" Margin="40,40,0,0">
+                    <Image Width="40" Height="40" x:Name="RetweetUserIcon"></Image>
+                </Border>
+            </Grid>
+            <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="{Binding ShowName}"></TextBlock>
+            <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" Text="{Binding CreatedAtStr}"></TextBlock>
+            <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" Text="{Binding SentUserText}"></TextBlock>
+            <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="{Binding Text}"></TextBlock>
+        </DockPanel>
+    </Border>
 </UserControl>

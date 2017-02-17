@@ -13,24 +13,14 @@
             <MenuItem Header="ロード" x:Name="loadButton" Click="loadButton_Click"></MenuItem>
             <MenuItem x:Name="autoLoad" IsCheckable="True" IsChecked="False" Header="自動更新"></MenuItem>
         </Menu>
-        <ItemsControl x:Name="tweetsControl">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel>
-                    </StackPanel>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <!--
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type local:Tweet}">
-                    <DockPanel>
-                        <Image DockPanel.Dock="Left" Source="{Binding IconUrl}" />
-                        <TextBlock DockPanel.Dock="Top" Text="{Binding UserNameAndScreenName }"  TextWrapping="Wrap"></TextBlock>
-                        <TextBlock TextWrapping="Wrap" Text="{Binding Text}" ></TextBlock>
-                    </DockPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            -->
-        </ItemsControl>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="tweetsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
     </DockPanel>
 </UserControl>

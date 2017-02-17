@@ -27,6 +27,18 @@ namespace Suiren
             Tweet = tweet;
             InitializeComponent();
             DataContext = Tweet;
+            if (Tweet.isRetweet)
+            {
+                BitmapImage bmp = new BitmapImage();
+                bmp.BeginInit();
+                bmp.UriSource = new Uri(Tweet.SentUserIcon);
+                bmp.EndInit();
+                RetweetUserIcon.Source = bmp;
+            }
+            else
+            {
+                RetweetUserIconBorder.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
