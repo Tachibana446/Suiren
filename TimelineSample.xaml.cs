@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CoreTweet;
+using System.Collections.ObjectModel;
 
 namespace Suiren
 {
@@ -21,7 +22,7 @@ namespace Suiren
     /// </summary>
     public partial class TimelineSample : UserControl
     {
-        public List<Tweet> Timeline { get; set; } = new List<Tweet>();
+        public ObservableCollection<TweetPanel> Timeline { get; set; } = new ObservableCollection<TweetPanel>();
         public bool isAutoLoad { get; set; } = false;
 
         private Tokens token;
@@ -38,8 +39,8 @@ namespace Suiren
             var htl = await token.Statuses.HomeTimelineAsync();
             foreach (var status in htl)
             {
-                if (!Timeline.Any(t => t.Id == status.Id))
-                    Timeline.Add(new Tweet(status));
+                if (!Timeline.Any(t => t.Tweet.Id == status.Id))
+                    Timeline.Add(new TweetPanel(new Tweet(status)));
             }
         }
 

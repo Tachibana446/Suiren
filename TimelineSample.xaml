@@ -20,6 +20,7 @@
                     </StackPanel>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <!--
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:Tweet}">
                     <DockPanel>
@@ -29,6 +30,7 @@
                     </DockPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
+            -->
         </ItemsControl>
     </DockPanel>
 </UserControl>
