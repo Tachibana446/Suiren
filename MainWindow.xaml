@@ -6,7 +6,34 @@
         xmlns:local="clr-namespace:Suiren"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+    <Window.Resources>
+        <!-- Default Style -->
+        <Style TargetType="StatusBar">
+            <Setter Property="Height" Value="20" />
+        </Style>
+        <Style x:Key="PanesControllStyle">
+            <!-- タブの中の複数のペインを含むItemsControllのスタイル -->
+        </Style>
+        <Style x:Key="PaneStyle" >
+            <!-- タイムラインのペインのスタイル -->
+        </Style>
+        <!-- Style -->
+
+    </Window.Resources>
+    <DockPanel>
+        <Menu x:Name="menu" DockPanel.Dock="Top">
+            <MenuItem Header="ファイル">
+                <MenuItem Header="ホーム" x:Name="homeTimelineMenu" Click="homeTimelineMenu_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="認証" x:Name="authMenu" Click="authMenu_Click"></MenuItem>
+        </Menu>
+        <StatusBar x:Name="statusBar" DockPanel.Dock="Bottom">
+        </StatusBar>
+        <TabControl x:Name="tabControl">
+            <TabItem Header="基本">
+                <ItemsControl x:Name="panesControll" Style="{StaticResource PanesControllStyle}">
+                </ItemsControl>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>
