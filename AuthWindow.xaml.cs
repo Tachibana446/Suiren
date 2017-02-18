@@ -41,7 +41,7 @@ namespace Suiren
 
         private void urlButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(s.AuthorizeUri.ToString());
+            Setting.Instance.BrowserStart(s.AuthorizeUri.ToString());
         }
     }
 }

@@ -34,6 +34,7 @@
                 <Separator></Separator>
                 <MenuItem Header="ログアウト" x:Name="logoutMenu" Click="logoutMenu_Click"></MenuItem>
             </MenuItem>
+            <MenuItem Header="設定" Click="SettingMenuItem_Click" />
         </Menu>
         <StatusBar x:Name="statusBar" DockPanel.Dock="Bottom">
             <StatusBarItem>

@@ -233,5 +233,15 @@ namespace Suiren
             var window = new CreateTweetWindow(Tokens, UserAccounts, this, toReply);
             window.ShowDialog();
         }
+        /// <summary>
+        /// 「設定」メニュー
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SettingMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new SettingWindow();
+            window.ShowDialog();
+        }
     }
 }

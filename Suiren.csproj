@@ -79,6 +79,10 @@
     <Compile Include="MentionsTimeline.xaml.cs">
       <DependentUpon>MentionsTimeline.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Setting.cs" />
+    <Compile Include="SettingWindow.xaml.cs">
+      <DependentUpon>SettingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Timeline.cs" />
     <Compile Include="TimelinePane.cs" />
     <Compile Include="TimelineSample.xaml.cs">
@@ -117,6 +121,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MentionsTimeline.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
