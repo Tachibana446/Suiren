@@ -21,6 +21,8 @@ namespace Suiren
     /// </summary>
     public partial class TweetPanel : UserControl, INotifyPropertyChanged
     {
+        private MainWindow parent;
+
         private Tweet _tweet;
         public Tweet Tweet
         {
@@ -38,8 +40,9 @@ namespace Suiren
             }
         }
 
-        public TweetPanel(Tweet tweet)
+        public TweetPanel(Tweet tweet, MainWindow parent)
         {
+            this.parent = parent;
             Tweet = tweet;
             InitializeComponent();
             DataContext = Tweet;
@@ -58,5 +61,19 @@ namespace Suiren
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private void replyButton_Click(object sender, RoutedEventArgs e)
+        {
+            parent.ShowReplyWindow(this);
+        }
+
+        private void retweetButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void favButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

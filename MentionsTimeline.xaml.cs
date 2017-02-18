@@ -26,12 +26,14 @@ namespace Suiren
         public ObservableCollection<TweetPanel> Timeline { get; set; } = new ObservableCollection<TweetPanel>();
 
         private Tokens token;
+        private MainWindow parent;
 
         private DispatcherTimer timer = new DispatcherTimer(DispatcherPriority.Normal);
 
-        public MentionsTimeline(Tokens t)
+        public MentionsTimeline(Tokens t, MainWindow parent)
         {
             token = t;
+            this.parent = parent;
             InitializeComponent();
             tweetsControl.ItemsSource = Timeline;
             timer.Interval = new TimeSpan(0, 5, 0);
@@ -52,7 +54,7 @@ namespace Suiren
             foreach (var status in tl)
             {
                 if (!Timeline.Any(t => t.Tweet.Id == status.Id))
-                    Timeline.Insert(0, new TweetPanel(new Tweet(status)));
+                    Timeline.Insert(0, new TweetPanel(new Tweet(status), parent));
             }
         }
 

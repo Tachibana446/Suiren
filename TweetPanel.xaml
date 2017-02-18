@@ -23,6 +23,14 @@
                        FontSize="16" Foreground="Gray"></TextBlock>
             <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" Text="{Binding SentUserText}"
                        FontSize="16" Foreground="Gray"></TextBlock>
+            <WrapPanel DockPanel.Dock="Bottom">
+                <Button x:Name="replyButton" Background="White" Foreground="DeepSkyBlue"
+                        FontSize="18" Padding="10,2" Click="replyButton_Click">↩返信</Button>
+                <Button Background="White" Foreground="Lime"
+                        FontSize="18" Padding="10,2" Click="retweetButton_Click">↺RT</Button>
+                <Button Background="White" Foreground="DeepPink"
+                        FontSize="18" Padding="10,2" Click="favButton_Click">♡いいね</Button>
+            </WrapPanel>
             <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="{Binding Text}"
                        FontSize="24" ></TextBlock>
         </DockPanel>

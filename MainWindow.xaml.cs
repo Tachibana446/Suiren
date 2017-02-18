@@ -97,7 +97,7 @@ namespace Suiren
             {
                 // TODO 選択
             }
-            var pane = new TimelineSample(token);
+            var pane = new TimelineSample(token, this);
             Panes.Add(pane);
             panesControll.Items.Add(pane);
             ResizePanes();
@@ -184,7 +184,7 @@ namespace Suiren
             {
                 // TODO 選択
             }
-            var pane = new MentionsTimeline(token);
+            var pane = new MentionsTimeline(token, this);
             Panes.Add(pane);
             panesControll.Items.Add(pane);
             ResizePanes();
@@ -226,6 +226,12 @@ namespace Suiren
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public void ShowReplyWindow(TweetPanel toReply)
+        {
+            var window = new CreateTweetWindow(Tokens, UserAccounts, this, toReply);
+            window.ShowDialog();
         }
     }
 }

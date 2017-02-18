@@ -26,11 +26,12 @@ namespace Suiren
 
         /// <summary>
         /// toReplyでReply先の設定
+        /// toReplyを指定したときはparentも必要
         /// </summary>
         /// <param name="tokens"></param>
         /// <param name="users"></param>
         /// <param name="toReply"></param>
-        public CreateTweetWindow(List<Tokens> tokens, List<User> users, TweetPanel toReply = null)
+        public CreateTweetWindow(List<Tokens> tokens, List<User> users, MainWindow parent = null, TweetPanel toReply = null)
         {
             this.toReply = toReply;
             this.tokens = tokens;
@@ -40,7 +41,7 @@ namespace Suiren
             comboBox.SelectedIndex = 0;
             if (toReply != null)
             {
-                reply.Children.Add(toReply);
+                reply.Children.Add(new TweetPanel(toReply.Tweet, parent));
                 textBox.Text = $"@{toReply.Tweet.UserScreenName} ";
             }
         }
