@@ -52,5 +52,23 @@ namespace Suiren
             Setting.Instance.RollBack();
             Close();
         }
+
+        private void ChangeBackgroundButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog()
+            {
+                Title = "画像を選択",
+                Filter = "画像|*.png;*.jpg;*.bmp;*.gif|すべてのファイル|*.*"
+            };
+            if (dialog.ShowDialog() == true)
+            {
+                Setting.Instance.BackgroundImagePath = dialog.FileName;
+            }
+        }
+
+        private void ResetBackgroundButton_Click(object sender, RoutedEventArgs e)
+        {
+            Setting.Instance.BackgroundImagePath = "";
+        }
     }
 }

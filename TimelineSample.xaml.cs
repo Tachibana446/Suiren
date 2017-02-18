@@ -39,6 +39,8 @@ namespace Suiren
             timer.Interval = new TimeSpan(0, 5, 0);
             timer.Tick += Timer_Tick;
             timer.Start();
+            // Layout
+            Opacity = Setting.Instance.PaneOpacity;
         }
 
         private async void Timer_Tick(object sender, EventArgs e)

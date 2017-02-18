@@ -20,6 +20,23 @@
                         <Button Click="ChangeBrowserButton_Click" Padding="10 ,0">変更</Button>
                         <Button Click="DefaultBrowserButton_Click" Padding="10,0">既定に戻す</Button>
                     </WrapPanel>
+
+                </WrapPanel>
+            </TabItem>
+            <TabItem Header="外観">
+                <WrapPanel Orientation="Vertical"   >
+                    <Label>ホームの背景画像</Label>
+                    <TextBlock Text="{Binding BackgroundImagePath}"></TextBlock>
+                    <WrapPanel>
+                        <Button Click="ChangeBackgroundButton_Click">変更</Button>
+                        <Button Click="ResetBackgroundButton_Click">初期値に戻す</Button>
+                    </WrapPanel>
+
+                    <TextBlock Text=" " />
+                    <TextBlock>各ペインの透明度</TextBlock>
+                    <TextBlock Text="{Binding PaneOpacityPercent}" />
+                    <Slider Minimum="0" Maximum="1.0" Value="{Binding PaneOpacity}"
+                            LargeChange="0.1" SmallChange="0.05"></Slider>
                 </WrapPanel>
             </TabItem>
         </TabControl>

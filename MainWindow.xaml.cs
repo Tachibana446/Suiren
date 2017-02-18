@@ -54,6 +54,7 @@ namespace Suiren
         {
             InitializeComponent();
             LoadTokens();
+
         }
 
         private void authMenu_Click(object sender, RoutedEventArgs e)
@@ -242,6 +243,20 @@ namespace Suiren
         {
             var window = new SettingWindow();
             window.ShowDialog();
+            if (Setting.Instance.BackgroundImagePath != "")
+            {
+                var image = new BitmapImage(new Uri(Setting.Instance.BackgroundImagePath, UriKind.Relative));
+                var brush = new ImageBrush(image) { Opacity = 1.0, Stretch = Stretch.UniformToFill };
+                normalTab.Background = brush;
+            }
+            else
+            {
+                normalTab.Background = Brushes.White;
+            }
+            foreach (UserControl item in panesControll.Items)
+            {
+                item.Opacity = Setting.Instance.PaneOpacity;
+            }
         }
     }
 }

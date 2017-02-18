@@ -39,6 +39,8 @@ namespace Suiren
             timer.Interval = new TimeSpan(0, 5, 0);
             timer.Tick += Timer_Tick;
             timer.Start();
+            // Layout
+            Opacity = Setting.Instance.PaneOpacity;
         }
 
         private async void Timer_Tick(object sender, EventArgs e)
@@ -49,8 +51,8 @@ namespace Suiren
 
         public async Task LoadTimeline()
         {
-            var tl = await token.Statuses.MentionsTimelineAsync(include_entities: true);
-            tl.OrderBy(t => t.CreatedAt);
+            var response = await token.Statuses.MentionsTimelineAsync(include_entities: true);
+            var tl = response.OrderBy(t => t.CreatedAt);
             foreach (var status in tl)
             {
                 if (!Timeline.Any(t => t.Tweet.Id == status.Id))
