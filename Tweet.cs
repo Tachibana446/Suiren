@@ -48,8 +48,10 @@ namespace Suiren
         public long Id { get { return status.Id; } }
         public DateTimeOffset CreatedAt { get { return status.CreatedAt; } }
         public bool isRetweet { get { return status.RetweetedStatus != null; } }
-        private Tweet RetweetTweet { get { return new Tweet(status.RetweetedStatus); } }
+        public Tweet RetweetTweet { get { return new Tweet(status.RetweetedStatus); } }
         public long RetweetedId { get { return isRetweet ? RetweetTweet.Id : -1; } }
+
+        public Entities Entities { get { return status.Entities; } }
         /// <summary>
         /// ツイート時間(RTならRT元の)
         /// </summary>

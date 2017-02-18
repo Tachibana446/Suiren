@@ -69,6 +69,9 @@
     <Compile Include="CreateTweetWindow.xaml.cs">
       <DependentUpon>CreateTweetWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImageWindow.xaml.cs">
+      <DependentUpon>ImageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Keys.cs" />
     <Compile Include="Logout.xaml.cs">
       <DependentUpon>Logout.xaml</DependentUpon>
@@ -90,6 +93,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateTweetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

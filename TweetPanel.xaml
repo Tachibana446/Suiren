@@ -7,6 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="300"
       >
+
     <Border BorderBrush="Black" BorderThickness="1">
         <DockPanel Width="400">
             <Canvas DockPanel.Dock="Left" Width="10" x:Name="UserColor" Background="White"></Canvas>
@@ -31,6 +32,8 @@
                 <Button Background="White" Foreground="DeepPink"
                         FontSize="18" Padding="10,2" Click="favButton_Click">♡いいね</Button>
             </WrapPanel>
+            <!-- media -->
+            <WrapPanel DockPanel.Dock="Bottom" x:Name="mediasWrapPanel"></WrapPanel>
             <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="{Binding Text}"
                        FontSize="24" ></TextBlock>
         </DockPanel>

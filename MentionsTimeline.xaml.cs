@@ -49,7 +49,7 @@ namespace Suiren
 
         public async Task LoadTimeline()
         {
-            var tl = await token.Statuses.MentionsTimelineAsync();
+            var tl = await token.Statuses.MentionsTimelineAsync(include_entities: true);
             tl.OrderBy(t => t.CreatedAt);
             foreach (var status in tl)
             {

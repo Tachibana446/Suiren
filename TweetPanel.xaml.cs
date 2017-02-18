@@ -23,6 +23,8 @@ namespace Suiren
     {
         private MainWindow parent;
 
+        private List<string> MediaUrls = new List<string>();
+
         private Tweet _tweet;
         public Tweet Tweet
         {
@@ -57,6 +59,31 @@ namespace Suiren
             else
             {
                 RetweetUserIconBorder.Visibility = Visibility.Hidden;
+            }
+            var origTweet = Tweet.isRetweet ? Tweet.RetweetTweet : Tweet;
+            if (origTweet.Entities != null && origTweet.Entities.Media != null && origTweet.Entities.Media.Length > 0)
+            {
+                foreach (var ent in origTweet.Entities.Media)
+                {
+                    if (ent.VideoInfo != null)
+                    {
+                        foreach (var v in ent.VideoInfo.Variants)
+                            MediaUrls.Add(v.Url);
+                    }
+                    else
+                    {
+                        MediaUrls.Add(ent.MediaUrl + ":orig");
+                    }
+                }
+                foreach (var url in MediaUrls)
+                {
+                    var bitmap = new BitmapImage(new Uri(url));
+                    var button = new Button();
+                    var image = new Image() { Width = 200, Height = 200, Source = bitmap };
+                    button.Content = image;
+                    button.Click += (s, e) => (new ImageWindow(url)).Show();
+                    mediasWrapPanel.Children.Add(button);
+                }
             }
         }
 
