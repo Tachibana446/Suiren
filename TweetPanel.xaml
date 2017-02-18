@@ -9,6 +9,7 @@
       >
     <Border BorderBrush="Black" BorderThickness="1">
         <DockPanel Width="400">
+            <Canvas DockPanel.Dock="Left" Width="10" x:Name="UserColor" Background="White"></Canvas>
             <Grid DockPanel.Dock="Left" Width="80" Height="80">
                 <Image Width="80" Height="80" Source="{Binding IconUrl}" />
                 <!-- リツイートの時表示 -->
@@ -16,10 +17,14 @@
                     <Image Width="40" Height="40" x:Name="RetweetUserIcon"></Image>
                 </Border>
             </Grid>
-            <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="{Binding ShowName}"></TextBlock>
-            <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" Text="{Binding CreatedAtStr}"></TextBlock>
-            <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" Text="{Binding SentUserText}"></TextBlock>
-            <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="{Binding Text}"></TextBlock>
+            <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="{Binding ShowName}"
+                       FontSize="30"></TextBlock>
+            <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" Text="{Binding CreatedAtStr}"
+                       FontSize="16" Foreground="Gray"></TextBlock>
+            <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" Text="{Binding SentUserText}"
+                       FontSize="16" Foreground="Gray"></TextBlock>
+            <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="{Binding Text}"
+                       FontSize="24" ></TextBlock>
         </DockPanel>
     </Border>
 </UserControl>

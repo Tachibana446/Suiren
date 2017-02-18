@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CoreTweet;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,16 +14,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CoreTweet;
-using System.Collections.ObjectModel;
 using System.Windows.Threading;
 
 namespace Suiren
 {
     /// <summary>
-    /// TimelineSample.xaml の相互作用ロジック
+    /// MentionsTimeline.xaml の相互作用ロジック
     /// </summary>
-    public partial class TimelineSample : UserControl, Timeline
+    public partial class MentionsTimeline : UserControl, Timeline
     {
         public ObservableCollection<TweetPanel> Timeline { get; set; } = new ObservableCollection<TweetPanel>();
 
@@ -29,7 +29,7 @@ namespace Suiren
 
         private DispatcherTimer timer = new DispatcherTimer(DispatcherPriority.Normal);
 
-        public TimelineSample(Tokens t)
+        public MentionsTimeline(Tokens t)
         {
             token = t;
             InitializeComponent();
@@ -45,10 +45,10 @@ namespace Suiren
                 await LoadTimeline();
         }
 
-        public virtual async Task LoadTimeline()
+        public async Task LoadTimeline()
         {
-            var response = await token.Statuses.HomeTimelineAsync();
-            var tl = response.OrderBy(t => t.CreatedAt);
+            var tl = await token.Statuses.MentionsTimelineAsync();
+            tl.OrderBy(t => t.CreatedAt);
             foreach (var status in tl)
             {
                 if (!Timeline.Any(t => t.Tweet.Id == status.Id))

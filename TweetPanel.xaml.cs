@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,24 @@ namespace Suiren
     /// <summary>
     /// TweetPanel.xaml の相互作用ロジック
     /// </summary>
-    public partial class TweetPanel : UserControl
+    public partial class TweetPanel : UserControl, INotifyPropertyChanged
     {
-        public Tweet Tweet;
+        private Tweet _tweet;
+        public Tweet Tweet
+        {
+            get
+            {
+                return _tweet;
+            }
+            set
+            {
+                if (_tweet != value)
+                {
+                    _tweet = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tweet)));
+                }
+            }
+        }
 
         public TweetPanel(Tweet tweet)
         {
@@ -40,5 +56,7 @@ namespace Suiren
                 RetweetUserIconBorder.Visibility = Visibility.Hidden;
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

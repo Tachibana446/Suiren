@@ -29,7 +29,7 @@ namespace Suiren
         /// ツイートのユーザー名（RT元ではない）
         /// </summary>
         private string UserName { get { return status.User.Name; } }
-        private string UserScreenName { get { return status.User.ScreenName; } }
+        public string UserScreenName { get { return status.User.ScreenName; } }
         private string UserNameAndScreenName { get { return $"{UserName} (@{UserScreenName})"; } }
         /// <summary>
         /// ユーザー名（RTならRT元のユーザー名）
@@ -61,7 +61,7 @@ namespace Suiren
                     return RetweetTweet.CreatedAtStr;
                 else
                 {
-                    DateTime d = CreatedAt.DateTime.AddHours(CreatedAt.Offset.Hours);
+                    DateTime d = CreatedAt.DateTime.AddHours(9);
                     return $"{d.Year}/{d.Month}/{d.Day} {d.Hour}:{d.Minute}:{d.Second}";
                 }
             }
@@ -70,14 +70,14 @@ namespace Suiren
         {
             get
             {
-                DateTime d = CreatedAt.DateTime.AddHours(CreatedAt.Offset.Hours);
+                DateTime d = CreatedAt.DateTime.AddHours(9);
                 return $"{d.Year}/{d.Month}/{d.Day} {d.Hour}:{d.Minute}:{d.Second}";
             }
         }
 
         public string SentUserText
         {
-            get { return isRetweet ? $"{UserNameAndScreenName}がRTしました。({SentAtStr})" : ""; }
+            get { return isRetweet ? $"{UserNameAndScreenName}がRTしました。\n({SentAtStr})" : ""; }
         }
 
         public Tweet(Status s)

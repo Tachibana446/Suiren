@@ -1,0 +1,19 @@
+﻿<Window x:Class="Suiren.CreateTweetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Suiren"
+        mc:Ignorable="d"
+        Title="ツイート" Height="368.771" Width="300">
+    <WrapPanel Orientation="Vertical">
+        <WrapPanel x:Name="reply" />
+        <ComboBox x:Name="comboBox" FontSize="18"></ComboBox>
+        <TextBox x:Name="textBox" Width="290" Height="120" FontSize="24"></TextBox>
+        <WrapPanel HorizontalAlignment="Center">
+            <Button FontSize="24" Margin="0,0,10,0" Background="Orange" Foreground="White"
+                    Click="TweetButton_Click">つぶやく</Button>
+            <Button FontSize="24" Margin="0,0" Click="CancelButton_Click">キャンセル</Button>
+        </WrapPanel>
+    </WrapPanel>
+</Window>

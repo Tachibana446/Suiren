@@ -23,12 +23,16 @@
     </Window.Resources>
     <DockPanel>
         <Menu x:Name="menu" DockPanel.Dock="Top">
+            <MenuItem Header="つぶやく" Click="CreateTweetMenuItem_Click"></MenuItem>
             <MenuItem Header="タイムライン">
                 <MenuItem Header="ホーム" x:Name="homeTimelineMenu" Click="homeTimelineMenu_Click"></MenuItem>
+                <MenuItem Header="メンション" Click="MentionMenuItem_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="認証" x:Name="authMenu">
                 <MenuItem Header="認証する" Click="authMenu_Click" ></MenuItem>
                 <MenuItem Header="認証済み:0" x:Name="authorizedCountMenu"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="ログアウト" x:Name="logoutMenu" Click="logoutMenu_Click"></MenuItem>
             </MenuItem>
         </Menu>
         <StatusBar x:Name="statusBar" DockPanel.Dock="Bottom">

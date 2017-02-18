@@ -23,10 +23,32 @@ namespace Suiren
     public partial class MainWindow : Window
     {
         private OAuth.OAuthSession Session = OAuth.Authorize(Keys.ConsumerKey, Keys.ConsumerSecret);
-        private List<Tokens> Tokens = new List<CoreTweet.Tokens>();
+        private List<Tokens> _tokens = new List<CoreTweet.Tokens>();
+        private List<Tokens> Tokens
+        {
+            get
+            {
+                return _tokens;
+            }
+            set
+            {
+                if (_tokens != value)
+                {
+                    _tokens = value;
+                    authorizedCountMenu.Header = $"認証済み:{_tokens.Count}";
+                }
+            }
+        }
+        /// <summary>
+        /// トークンごとに対応するユーザーデータ
+        /// </summary>
+        private List<User> UserAccounts = new List<User>();
         private int CurrentTokenIndex = 0;
         private AuthWindow AuthWindow = null;
-        private List<TimelineSample> Panes = new List<TimelineSample>();
+        private List<Timeline> Panes = new List<Timeline>();
+
+        // まとめて閉じるときに使うかも
+        //private List<CreateTweetWindow> createTweetWindows = new List<CreateTweetWindow>();
 
         public MainWindow()
         {
@@ -52,8 +74,9 @@ namespace Suiren
                 return;
             }
             Tokens.Add(token);
-            authorizedCountMenu.Header = $"認証済み:{Tokens.Count}";
+            UserAccounts.Add(token.Statuses.UserTimeline().First().User);
             SaveTokens();
+            authorizedCountMenu.Header = $"認証済み:{Tokens.Count}";
             statusBarText.Text = "アカウント認証完了";
             authMenu.IsChecked = true;
         }
@@ -112,7 +135,9 @@ namespace Suiren
                 {
                     try
                     {
-                        Tokens.Add(CoreTweet.Tokens.Create(Keys.ConsumerKey, Keys.ConsumerSecret, tokenStr, line));
+                        var token = CoreTweet.Tokens.Create(Keys.ConsumerKey, Keys.ConsumerSecret, tokenStr, line);
+                        Tokens.Add(token);
+                        UserAccounts.Add(token.Statuses.UserTimeline().First().User);
                     }
                     catch
                     {
@@ -141,6 +166,66 @@ namespace Suiren
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ResizePanes();
+        }
+
+        private async void MentionMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Tokens token = null;
+            if (Tokens.Count <= 0)
+            {
+                MessageBox.Show("まずは認証してください");
+                return;
+            }
+            else if (Tokens.Count == 1)
+            {
+                token = Tokens.First();
+            }
+            else
+            {
+                // TODO 選択
+            }
+            var pane = new MentionsTimeline(token);
+            Panes.Add(pane);
+            panesControll.Items.Add(pane);
+            ResizePanes();
+            await pane.LoadTimeline();
+            return;
+        }
+
+        /// <summary>
+        /// 「つぶやく」メニュークリック時
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CreateTweetMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new CreateTweetWindow(Tokens, UserAccounts);
+            // もし開いたウィンドウを記憶しておきたければ
+            //createTweetWindows.Add(window);
+            window.Show();
+        }
+
+
+        private void logoutMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var logoutWindow = new Logout(UserAccounts, this);
+            logoutWindow.ShowDialog();
+        }
+
+        public void Logout(int index)
+        {
+            try
+            {
+                Tokens.RemoveAt(index);
+                UserAccounts.RemoveAt(index);
+                authorizedCountMenu.Header = $"認証済み:{Tokens.Count}";
+                SaveTokens();
+                MessageBox.Show("ログアウトしました");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
