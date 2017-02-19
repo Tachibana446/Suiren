@@ -6,6 +6,16 @@
         xmlns:local="clr-namespace:Suiren"
         mc:Ignorable="d"
         Title="SettingWindow" Height="400" Width="600">
+    <Window.Resources>
+        <Style x:Key="Header1" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Margin" Value="0,2,5,0" />
+            <Setter Property="Padding" Value="10,0"/>
+        </Style>
+    </Window.Resources>
     <DockPanel>
         <WrapPanel DockPanel.Dock="Bottom">
             <Button x:Name="OkButton" FontSize="24" Padding="20,2" Margin="0,0,10,0" Click="OkButton_Click">OK</Button>
@@ -20,12 +30,11 @@
                         <Button Click="ChangeBrowserButton_Click" Padding="10 ,0">変更</Button>
                         <Button Click="DefaultBrowserButton_Click" Padding="10,0">既定に戻す</Button>
                     </WrapPanel>
-
                 </WrapPanel>
             </TabItem>
-            <TabItem Header="外観">
+            <TabItem Header="外観" Height="22" VerticalAlignment="Top">
                 <WrapPanel Orientation="Vertical"   >
-                    <Label>ホームの背景画像</Label>
+                    <TextBlock Style="{StaticResource Header1}">ホームの背景画像</TextBlock>
                     <TextBlock Text="{Binding BackgroundImagePath}"></TextBlock>
                     <WrapPanel>
                         <Button Click="ChangeBackgroundButton_Click">変更</Button>
@@ -33,10 +42,17 @@
                     </WrapPanel>
 
                     <TextBlock Text=" " />
-                    <TextBlock>各ペインの透明度</TextBlock>
+                    <TextBlock Style="{StaticResource Header1}">各ペインの透明度</TextBlock>
                     <TextBlock Text="{Binding PaneOpacityPercent}" />
                     <Slider Minimum="0" Maximum="1.0" Value="{Binding PaneOpacity}"
                             LargeChange="0.1" SmallChange="0.05"></Slider>
+                    <Separator ></Separator>
+                    <TextBlock Style="{StaticResource Header1}">各ペインの背景色</TextBlock>
+                    <ComboBox x:Name="panesComboBox1"></ComboBox>
+                    <WrapPanel>
+                        <Button Click="paneColorChangeButton_Click">変更</Button>
+                        <Button Click="paneColorDefaultButton_Click">既定に戻す</Button>
+                    </WrapPanel>
                 </WrapPanel>
             </TabItem>
         </TabControl>

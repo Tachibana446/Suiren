@@ -25,6 +25,7 @@ namespace Suiren
             Setting.Instance.BackUp();
             InitializeComponent();
             DataContext = Setting.Instance;
+            panesComboBox1.ItemsSource = Setting.Instance.PaneColors.Select(pc => pc.PaneClass);
         }
 
         private void ChangeBrowserButton_Click(object sender, RoutedEventArgs e)
@@ -69,6 +70,20 @@ namespace Suiren
         private void ResetBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
             Setting.Instance.BackgroundImagePath = "";
+        }
+
+        private void paneColorChangeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var index = panesComboBox1.SelectedIndex;
+            if (index == -1) return;
+            
+        }
+
+        private void paneColorDefaultButton_Click(object sender, RoutedEventArgs e)
+        {
+            var index = panesComboBox1.SelectedIndex;
+            if (index == -1) return;
+            Setting.Instance.PaneColors[index].Color = Brushes.White;
         }
     }
 }

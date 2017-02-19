@@ -243,6 +243,7 @@ namespace Suiren
         {
             var window = new SettingWindow();
             window.ShowDialog();
+            // 設定の反映
             if (Setting.Instance.BackgroundImagePath != "")
             {
                 var image = new BitmapImage(new Uri(Setting.Instance.BackgroundImagePath, UriKind.Relative));
@@ -256,6 +257,8 @@ namespace Suiren
             foreach (UserControl item in panesControll.Items)
             {
                 item.Opacity = Setting.Instance.PaneOpacity;
+                if (Setting.Instance.PaneColors.Any(pc => pc.PaneClass == item.GetType()))
+                    item.Background = Setting.Instance.PaneColors.First(pc => pc.PaneClass == item.GetType()).Color;
             }
         }
     }

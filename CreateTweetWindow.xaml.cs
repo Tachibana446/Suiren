@@ -69,7 +69,10 @@ namespace Suiren
             try
             {
                 if (toReply != null)
+                {
                     token.Statuses.Update(status: text, in_reply_to_status_id: toReply.Tweet.Id);
+                    toReply = null;
+                }
                 else
                     token.Statuses.Update(status: text);
                 MessageBox.Show("つぶやきました");
