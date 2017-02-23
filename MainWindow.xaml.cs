@@ -82,6 +82,11 @@ namespace Suiren
             authMenu.IsChecked = true;
         }
 
+        /// <summary>
+        /// ホームタイムラインの追加
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void homeTimelineMenu_Click(object sender, RoutedEventArgs e)
         {
             Tokens token = null;
@@ -102,6 +107,7 @@ namespace Suiren
             Panes.Add(pane);
             panesControll.Items.Add(pane);
             ResizePanes();
+            ReflectPanesBackground();
             await pane.LoadTimeline();
             return;
         }
@@ -254,11 +260,20 @@ namespace Suiren
             {
                 normalTab.Background = Brushes.White;
             }
-            foreach (UserControl item in panesControll.Items)
+            ReflectPanesBackground();
+        }
+
+        /// <summary>
+        /// 各ペインの背景を設定したものに変更する
+        /// </summary>
+        private void ReflectPanesBackground()
+        {
+            foreach (UserControl pane in panesControll.Items)
             {
-                item.Opacity = Setting.Instance.PaneOpacity;
-                if (Setting.Instance.PaneColors.Any(pc => pc.PaneClass == item.GetType()))
-                    item.Background = Setting.Instance.PaneColors.First(pc => pc.PaneClass == item.GetType()).Color;
+                pane.Opacity = Setting.Instance.PaneOpacity;
+                var paneType = pane.GetType();
+                if (Setting.Instance.PaneColors.Any(pc => pc.PaneClass == paneType))
+                    pane.Background = Setting.Instance.PaneColors.First(pc => pc.PaneClass == paneType).Color;
             }
         }
     }

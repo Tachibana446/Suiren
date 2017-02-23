@@ -6,9 +6,10 @@
       xmlns:local="clr-namespace:Suiren"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
+      
+      Background="White"
              >
     <DockPanel>
-        <DockPanel.Background>White</DockPanel.Background>
         <Menu DockPanel.Dock="Top" Height="20">
             <MenuItem Header="ロード" x:Name="loadButton" Click="loadButton_Click"></MenuItem>
             <MenuItem x:Name="autoLoad" IsCheckable="True" IsChecked="False" Header="自動更新"></MenuItem>

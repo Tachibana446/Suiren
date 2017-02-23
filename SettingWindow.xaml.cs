@@ -25,7 +25,7 @@ namespace Suiren
             Setting.Instance.BackUp();
             InitializeComponent();
             DataContext = Setting.Instance;
-            panesComboBox1.ItemsSource = Setting.Instance.PaneColors.Select(pc => pc.PaneClass);
+            panesComboBox1.ItemsSource = Setting.Instance.PaneColors.Select(pc => pc.GetType());
         }
 
         private void ChangeBrowserButton_Click(object sender, RoutedEventArgs e)
@@ -76,7 +76,11 @@ namespace Suiren
         {
             var index = panesComboBox1.SelectedIndex;
             if (index == -1) return;
-            
+            var dialog = new BrushPicker.BrushPickerWindow();
+            if (dialog.ShowDialog() == true)
+            {
+                Setting.Instance.PaneColors[index].Color = dialog.NowBrush;
+            }
         }
 
         private void paneColorDefaultButton_Click(object sender, RoutedEventArgs e)

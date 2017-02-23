@@ -69,6 +69,9 @@
     <Compile Include="AuthWindow.xaml.cs">
       <DependentUpon>AuthWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BrushPickerWindow.xaml.cs">
+      <DependentUpon>BrushPickerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateTweetWindow.xaml.cs">
       <DependentUpon>CreateTweetWindow.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
     <Page Include="AuthWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrushPickerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="CreateTweetWindow.xaml">
       <SubType>Designer</SubType>
@@ -169,7 +176,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Timeline.xaml.txt" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

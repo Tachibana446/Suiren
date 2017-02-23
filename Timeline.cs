@@ -9,5 +9,6 @@ namespace Suiren
     interface Timeline
     {
         Task LoadTimeline();
+       
     }
 }
