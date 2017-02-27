@@ -24,6 +24,7 @@ namespace Suiren
     public partial class MentionsTimeline : UserControl, Timeline
     {
         public ObservableCollection<TweetPanel> Timeline { get; set; } = new ObservableCollection<TweetPanel>();
+        public object ToastTemplateType { get; private set; }
 
         private Tokens token;
         private MainWindow parent;
@@ -65,5 +66,9 @@ namespace Suiren
             await LoadTimeline();
         }
 
+        private void ToastTweet(Tweet t)
+        {
+            
+        }
     }
 }

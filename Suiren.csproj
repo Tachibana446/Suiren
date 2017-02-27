@@ -57,9 +57,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WpfBrushEditor">
-      <HintPath>..\WpfBrushEditor.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -93,6 +90,15 @@
     <Compile Include="TimelinePane.cs" />
     <Compile Include="TimelineSample.xaml.cs">
       <DependentUpon>TimelineSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TLparts\BackInTimeButton.xaml.cs">
+      <DependentUpon>BackInTimeButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TLparts\TokenSelectWindow.xaml.cs">
+      <DependentUpon>TokenSelectWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TLparts\TokenView.xaml.cs">
+      <DependentUpon>TokenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tweet.cs" />
     <Compile Include="TweetPanel.xaml.cs">
@@ -139,6 +145,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TimelineSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TLparts\BackInTimeButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TLparts\TokenSelectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TLparts\TokenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

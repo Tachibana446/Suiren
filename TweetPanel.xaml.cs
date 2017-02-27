@@ -96,11 +96,12 @@ namespace Suiren
 
         private void retweetButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            parent.CreateRetweet(Tweet);
         }
 
         private void favButton_Click(object sender, RoutedEventArgs e)
         {
+            parent.CreateFavorite(Tweet);
         }
     }
 }

@@ -31,14 +31,10 @@ namespace Suiren
         }
         private string _browserPath = "";
         /// <summary>
-        /// ホームの背景に出す画像
+        /// ホーム画面の背景
         /// </summary>
-        public string BackgroundImagePath
-        {
-            get { return _backgroundImagePath; }
-            set { if (_backgroundImagePath != value) { _backgroundImagePath = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BackgroundImagePath))); } }
-        }
-        private string _backgroundImagePath = "";
+        public Brush BackgroundBrush { get; set; } = Brushes.White;
+
         /// <summary>
         /// 各ペインの透明度 1が一番濃い 0が透明
         /// </summary>
@@ -60,9 +56,9 @@ namespace Suiren
 
         private static Setting old = new Setting();
         /// <summary>
-        /// 各ペインの色
+        /// 各ペインの背景
         /// </summary>
-        public ObservableCollection<PaneColor> PaneColors { get; set; } = new ObservableCollection<PaneColor>();
+        public ObservableCollection<PaneBrush> PaneBrushes { get; set; } = new ObservableCollection<PaneBrush>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -95,43 +91,48 @@ namespace Suiren
         private Setting()
         {
             // ペインの背景
-            PaneColors.Add(new PaneColor(typeof(TimelineSample)));
-            PaneColors.Add(new PaneColor(typeof(MentionsTimeline), Brushes.LightPink));
+            PaneBrushes.Add(new PaneBrush(typeof(TimelineSample), "ホーム"));
+            PaneBrushes.Add(new PaneBrush(typeof(MentionsTimeline), "返信", Brushes.LightPink));
         }
 
         private Setting(Setting s)
         {
             this.BrowserPath = s.BrowserPath;
-            this.BackgroundImagePath = s.BackgroundImagePath;
+            this.BackgroundBrush = s.BackgroundBrush;
             this.PaneOpacity = s.PaneOpacity;
-            this.PaneColors = s.PaneColors;
+            this.PaneBrushes = s.PaneBrushes;
         }
 
         /// <summary>
         /// ペインのクラスとカラーを保持する
         /// </summary>
-        public class PaneColor : INotifyPropertyChanged
+        public class PaneBrush : INotifyPropertyChanged
         {
             public event PropertyChangedEventHandler PropertyChanged;
             public Type PaneClass { get; private set; }
-            public Brush Color
+            /// <summary>
+            /// 表示する時の名前
+            /// </summary>
+            public string PaneTitle { get; private set; }
+            public Brush Brush
             {
-                get { return _color; }
+                get { return _brush; }
                 set
                 {
-                    if (_color != value)
+                    if (_brush != value)
                     {
-                        _color = value;
-                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Color)));
+                        _brush = value;
+                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Brush)));
                     }
                 }
             }
-            private Brush _color;
-            public PaneColor(Type paneClass, Brush color = null)
+            private Brush _brush;
+            public PaneBrush(Type paneClass, string name, Brush color = null)
             {
                 if (color == null) color = Brushes.White;
                 PaneClass = paneClass;
-                Color = color;
+                PaneTitle = name;
+                Brush = color;
             }
         }
     }
