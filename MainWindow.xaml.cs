@@ -82,6 +82,11 @@ namespace Suiren
             authMenu.IsChecked = true;
         }
 
+        /// <summary>
+        /// ホームタイムラインの追加
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void homeTimelineMenu_Click(object sender, RoutedEventArgs e)
         {
             Tokens token = null;
@@ -102,8 +107,72 @@ namespace Suiren
             Panes.Add(pane);
             panesControll.Items.Add(pane);
             ResizePanes();
+            ReflectPanesBackground();
             await pane.LoadTimeline();
             return;
+        }
+
+        /// <summary>
+        /// RTして保存する
+        /// </summary>
+        /// <param name="tweet"></param>
+        public void CreateRetweet(Tweet tweet)
+        {
+            try
+            {
+                if (Tokens.Count == 0)
+                    return;
+                else if (Tokens.Count == 1)
+                {
+                    Tokens.First().Statuses.Retweet(tweet.Id);
+                }
+                else
+                {
+                    // アカウント選択
+                    var window = new TLparts.TokenSelectWindow(Tokens, UserAccounts);
+                    window.ShowDialog();
+                    if (window.DialogResult == true)
+                        window.SelectedToken.Statuses.Retweet(tweet.Id);
+                    else
+                        return;
+                }
+            }
+            catch (TwitterException e)
+            {
+                MessageBox.Show(e.Message + "\n保存だけしました。");
+            }
+            // 保存
+            tweet.Save();
+        }
+
+        /// <summary>
+        /// いいねして保存する
+        /// </summary>
+        /// <param name="tweet"></param>
+        public void CreateFavorite(Tweet tweet)
+        {
+            try
+            {
+                if (Tokens.Count == 0) return;
+                else if (Tokens.Count == 1)
+                    Tokens.First().Favorites.Create(id: tweet.Id);
+                else
+                {
+                    // アカウント選択
+                    var window = new TLparts.TokenSelectWindow(Tokens, UserAccounts);
+                    window.ShowDialog();
+                    if (window.DialogResult == true)
+                        window.SelectedToken.Favorites.Create(id: tweet.Id);
+                    else
+                        return;
+                }
+            }
+            catch (TwitterException e)
+            {
+                MessageBox.Show(e.Message + "\n保存だけしました");
+            }
+            // 保存
+            tweet.Save();
         }
 
         private void SaveTokens()
@@ -160,7 +229,7 @@ namespace Suiren
         {
             foreach (Control item in panesControll.Items)
             {
-                item.MaxHeight = tabControl.ActualHeight - 20;
+                item.MaxHeight = tabControl.ActualHeight - 30;
             }
         }
 
@@ -169,6 +238,10 @@ namespace Suiren
             ResizePanes();
         }
 
+        /// <summary>
+        /// 返信タイムラインを追加
+        /// TODO この辺共通化できそう
+        /// </summary>
         private async void MentionMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Tokens token = null;
@@ -189,6 +262,7 @@ namespace Suiren
             Panes.Add(pane);
             panesControll.Items.Add(pane);
             ResizePanes();
+            ReflectPanesBackground();
             await pane.LoadTimeline();
             return;
         }
@@ -244,21 +318,21 @@ namespace Suiren
             var window = new SettingWindow();
             window.ShowDialog();
             // 設定の反映
-            if (Setting.Instance.BackgroundImagePath != "")
+            normalTab.Background = Setting.Instance.BackgroundBrush;
+            ReflectPanesBackground();
+        }
+
+        /// <summary>
+        /// 各ペインの背景を設定したものに変更する
+        /// </summary>
+        private void ReflectPanesBackground()
+        {
+            foreach (UserControl pane in panesControll.Items)
             {
-                var image = new BitmapImage(new Uri(Setting.Instance.BackgroundImagePath, UriKind.Relative));
-                var brush = new ImageBrush(image) { Opacity = 1.0, Stretch = Stretch.UniformToFill };
-                normalTab.Background = brush;
-            }
-            else
-            {
-                normalTab.Background = Brushes.White;
-            }
-            foreach (UserControl item in panesControll.Items)
-            {
-                item.Opacity = Setting.Instance.PaneOpacity;
-                if (Setting.Instance.PaneColors.Any(pc => pc.PaneClass == item.GetType()))
-                    item.Background = Setting.Instance.PaneColors.First(pc => pc.PaneClass == item.GetType()).Color;
+                pane.Opacity = Setting.Instance.PaneOpacity;
+                var paneType = pane.GetType();
+                if (Setting.Instance.PaneBrushes.Any(pc => pc.PaneClass == paneType))
+                    pane.Background = Setting.Instance.PaneBrushes.First(pc => pc.PaneClass == paneType).Brush;
             }
         }
     }

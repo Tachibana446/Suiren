@@ -1,0 +1,61 @@
+﻿<Window x:Class="BrushPicker.BrushPickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BrushPicker"
+        mc:Ignorable="d"
+        Title="BrushPickerWindow" Height="345.847" Width="539.069">
+    <WrapPanel Orientation="Vertical">
+        <TabControl Height="310" Width="260">
+            <TabItem Header="単色">
+                <WrapPanel Orientation="Vertical">
+                    <Canvas x:Name="colorBarCanvas" Width="250" Height="20" Margin="0,5,0,0">
+                        <Rectangle x:Name="colorBarRect" Width="250" Height="20"></Rectangle>
+                        <Slider x:Name="colorBarSlider" Width="250" Height="20" 
+                                Maximum="360" Minimum="0" LargeChange="10" ValueChanged="colorBarSlider_ValueChanged"/>
+                    </Canvas>
+                    <Canvas x:Name="colorCellsCanvas" Width="250" Height="250" MouseDown="colorCellsCanvas_MouseDown"></Canvas>
+                </WrapPanel>
+            </TabItem>
+            <TabItem Header="画像ブラシ">
+                <WrapPanel Orientation="Vertical">
+                    <Button Click="ImageSelectButton_Click">ファイルを選択</Button>
+                    <TextBlock>縦横比と拡大</TextBlock>
+                    <ComboBox x:Name="UniformComboBox" SelectionChanged="UniformComboBox_SelectionChanged"></ComboBox>
+                    <TextBlock>タイル状に敷き詰め</TextBlock>
+                    <ComboBox x:Name="TileComboBox" SelectionChanged="TileComboBox_SelectionChanged" />
+                    <WrapPanel x:Name="TileSizePanel">
+                        <WrapPanel Orientation="Vertical">
+                            <TextBlock>タイルの縦のサイズ</TextBlock>
+                            <ComboBox x:Name="TileHeightComboBox" SelectionChanged="TileHeightComboBox_SelectionChanged" ></ComboBox>
+                        </WrapPanel>
+                        <WrapPanel Orientation="Vertical">
+                            <TextBlock>タイルの横のサイズ</TextBlock>
+                            <ComboBox x:Name="TileWidthComboBox" SelectionChanged="TileWidthComboBox_SelectionChanged"></ComboBox>
+                        </WrapPanel>
+                    </WrapPanel>
+                </WrapPanel>
+            </TabItem>
+        </TabControl>
+        <TextBlock>現在のブラシ</TextBlock>
+        <Viewbox Width="250" Height="200">
+            <Canvas Width="600" Height="600">
+                <Rectangle x:Name="nowBrushRect" Width="600" Height="600"/>
+            </Canvas>
+        </Viewbox>
+        <TextBlock x:Name="opacityLabel">透明度:100%</TextBlock>
+        <Slider x:Name="opacitySlider" Maximum="1.0" Minimum="0.0" LargeChange="0.1" Value="1" 
+                SmallChange="0.01" ValueChanged="opacitySlider_ValueChanged"></Slider>
+        <WrapPanel HorizontalAlignment="Center">
+            <WrapPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Padding" Value="10,0" />
+                    <Setter Property="Margin" Value="10,0" />
+                </Style>
+            </WrapPanel.Resources>
+            <Button x:Name="okButton" Click="okButton_Click">OK</Button>
+            <Button x:Name="cancelButton" Click="cancelButton_Click">キャンセル</Button>
+        </WrapPanel>
+    </WrapPanel>
+</Window>

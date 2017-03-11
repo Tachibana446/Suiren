@@ -35,7 +35,9 @@
             <TabItem Header="外観" Height="22" VerticalAlignment="Top">
                 <WrapPanel Orientation="Vertical"   >
                     <TextBlock Style="{StaticResource Header1}">ホームの背景画像</TextBlock>
-                    <TextBlock Text="{Binding BackgroundImagePath}"></TextBlock>
+                    <Canvas Width="230" Height="30">
+                        <Rectangle x:Name="homeBackGroundRect" Width="230" Height="30"/>
+                    </Canvas>
                     <WrapPanel>
                         <Button Click="ChangeBackgroundButton_Click">変更</Button>
                         <Button Click="ResetBackgroundButton_Click">初期値に戻す</Button>

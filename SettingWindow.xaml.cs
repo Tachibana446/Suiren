@@ -25,9 +25,16 @@ namespace Suiren
             Setting.Instance.BackUp();
             InitializeComponent();
             DataContext = Setting.Instance;
-            panesComboBox1.ItemsSource = Setting.Instance.PaneColors.Select(pc => pc.PaneClass);
+            panesComboBox1.ItemsSource = Setting.Instance.PaneBrushes.Select(pc => pc.PaneTitle);
+            panesComboBox1.SelectedIndex = 0;
+            homeBackGroundRect.Fill = Setting.Instance.BackgroundBrush;
         }
 
+        /// <summary>
+        /// ブラウザ変更
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeBrowserButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog() { Title = "ブラウザ設定", Filter = "すべてのファイル|*.*", DereferenceLinks = false };
@@ -37,53 +44,73 @@ namespace Suiren
             }
 
         }
-
+        /// <summary>
+        /// ブラウザを既定に
+        /// </summary>
         private void DefaultBrowserButton_Click(object sender, RoutedEventArgs e)
         {
             Setting.Instance.BrowserPath = "";
         }
 
+        /// <summary>
+        /// OKボタン
+        /// </summary>
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// キャンセル　変更をロールバックして閉じる
+        /// </summary>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Setting.Instance.RollBack();
             Close();
         }
 
+        /// <summary>
+        /// ホーム画面の背景を変更
+        /// </summary>
         private void ChangeBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog()
-            {
-                Title = "画像を選択",
-                Filter = "画像|*.png;*.jpg;*.bmp;*.gif|すべてのファイル|*.*"
-            };
+            var dialog = new BrushPicker.BrushPickerWindow();
+
             if (dialog.ShowDialog() == true)
             {
-                Setting.Instance.BackgroundImagePath = dialog.FileName;
+                Setting.Instance.BackgroundBrush = dialog.NowBrush;
             }
         }
-
+        /// <summary>
+        /// ホーム画面の背景をデフォルトに
+        /// </summary>
         private void ResetBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
-            Setting.Instance.BackgroundImagePath = "";
+            Setting.Instance.BackgroundBrush = Brushes.White;
         }
-
+        /// <summary>
+        /// パネルの背景変更ボタンをクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void paneColorChangeButton_Click(object sender, RoutedEventArgs e)
         {
             var index = panesComboBox1.SelectedIndex;
             if (index == -1) return;
-            
+            var dialog = new BrushPicker.BrushPickerWindow(Setting.Instance.PaneBrushes[index].Brush);
+            if (dialog.ShowDialog() == true)
+            {
+                Setting.Instance.PaneBrushes[index].Brush = dialog.NowBrush;
+            }
         }
-
+        /// <summary>
+        /// パネルの背景を既定に
+        /// </summary>
         private void paneColorDefaultButton_Click(object sender, RoutedEventArgs e)
         {
             var index = panesComboBox1.SelectedIndex;
             if (index == -1) return;
-            Setting.Instance.PaneColors[index].Color = Brushes.White;
+            Setting.Instance.PaneBrushes[index].Brush = Brushes.White;
         }
     }
 }

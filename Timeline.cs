@@ -8,6 +8,11 @@ namespace Suiren
 {
     interface Timeline
     {
+        /// <summary>
+        /// タイムラインのロードくらいはみんな実装するほうが良いよね
+        /// </summary>
+        /// <returns></returns>
         Task LoadTimeline();
     }
+
 }
