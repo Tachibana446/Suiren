@@ -109,7 +109,11 @@ namespace Suiren
             }
             else
             {
-                // TODO 選択
+                var dlg = new TLparts.TokenSelectWindow(Tokens, UserAccounts);
+                if (dlg.ShowDialog() == true)
+                    token = dlg.SelectedToken;
+                else
+                    return;
             }
             var pane = new TimelineSample(token, this);
             Panes.Add(pane);
@@ -264,7 +268,11 @@ namespace Suiren
             }
             else
             {
-                // TODO 選択
+                var dlg = new TLparts.TokenSelectWindow(Tokens, UserAccounts);
+                if (dlg.ShowDialog() == true)
+                    token = dlg.SelectedToken;
+                else
+                    return;
             }
             var pane = new MentionsTimeline(token, this);
             Panes.Add(pane);

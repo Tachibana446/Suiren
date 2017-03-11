@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Suiren.TLparts"
         mc:Ignorable="d"
-        Height="300" Width="300">
+        Width="300">
     <DockPanel x:Name="dockPanel">
-        <Image DockPanel.Dock="Left" Width="100" Height="100" Source="{Binding ProfileImageUrl}"></Image>
+        <Image DockPanel.Dock="Left" Width="48" Height="48" Source="{Binding ProfileImageUrl}"></Image>
         <TextBlock DockPanel.Dock="Top" Text="{Binding Name}" />
         <TextBlock DockPanel.Dock="Top" Text="{Binding ScreenName}" />
     </DockPanel>
