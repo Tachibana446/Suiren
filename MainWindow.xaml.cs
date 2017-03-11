@@ -57,8 +57,16 @@ namespace Suiren
 
         }
 
+        /// <summary>
+        /// アカウントを認証する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void authMenu_Click(object sender, RoutedEventArgs e)
         {
+            // Authトークンの再取得のためのセッション再認証
+            Session = OAuth.Authorize(Session.ConsumerKey, Session.ConsumerSecret);
+
             AuthWindow = new AuthWindow(Session);
             AuthWindow.ShowDialog();
             if (!AuthWindow.isOk) return;
