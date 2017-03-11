@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Windows.UI.Notifications;
 
 namespace Suiren
 {
@@ -24,7 +25,6 @@ namespace Suiren
     public partial class MentionsTimeline : UserControl, Timeline
     {
         public ObservableCollection<TweetPanel> Timeline { get; set; } = new ObservableCollection<TweetPanel>();
-        public object ToastTemplateType { get; private set; }
 
         private Tokens token;
         private MainWindow parent;
@@ -57,7 +57,12 @@ namespace Suiren
             foreach (var status in tl)
             {
                 if (!Timeline.Any(t => t.Tweet.Id == status.Id))
-                    Timeline.Insert(0, new TweetPanel(new Tweet(status), parent));
+                {
+                    var tweet = new Tweet(status);
+                    Timeline.Insert(0, new TweetPanel(tweet, parent));
+                    // トースト通知
+                    ToastTweet(tweet);
+                }
             }
         }
 
@@ -66,9 +71,23 @@ namespace Suiren
             await LoadTimeline();
         }
 
+        /// <summary>
+        /// ツイートをアクションセンターにトースト表示
+        /// </summary>
+        /// <param name="t"></param>
         private void ToastTweet(Tweet t)
         {
-            
+            if (parent.IsActive) return;
+            var tmpl = ToastTemplateType.ToastImageAndText02;
+            var xml = ToastNotificationManager.GetTemplateContent(tmpl);
+            var image = xml.GetElementsByTagName("image").First();
+            var src = image.Attributes.GetNamedItem("src");
+            src.InnerText = t.SentUserIcon;
+            var text = xml.GetElementsByTagName("text");
+            text[0].AppendChild(xml.CreateTextNode(t.UserScreenName + "からの返信"));
+            text[1].AppendChild(xml.CreateTextNode(t.Text));
+            var toast = new ToastNotification(xml);
+            ToastNotificationManager.CreateToastNotifier("Suiren").Show(toast);
         }
     }
 }

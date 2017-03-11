@@ -23,13 +23,16 @@ namespace Suiren
             }
         }
         /// <summary>
-        /// アイコン
+        /// アイコン（RT元ではなく、ツイート・リツイートした人のアイコン）
         /// </summary>
         public string SentUserIcon { get { return status.User.ProfileImageUrl; } }
         /// <summary>
         /// ツイートのユーザー名（RT元ではない）
         /// </summary>
         private string UserName { get { return status.User.Name; } }
+        /// <summary>
+        /// RT元ではない、ツイートを作った人のスクリーンネーム
+        /// </summary>
         public string UserScreenName { get { return status.User.ScreenName; } }
         private string UserNameAndScreenName { get { return $"{UserName} (@{UserScreenName})"; } }
         /// <summary>
