@@ -113,7 +113,7 @@ namespace Suiren
             }
             var pane = new TimelineSample(token, this);
             Panes.Add(pane);
-            panesControll.Items.Add(pane);
+            PanesControl.Items.Add(pane);
             ResizePanes();
             ReflectPanesBackground();
             await pane.LoadTimeline();
@@ -235,7 +235,7 @@ namespace Suiren
         /// </summary>
         private void ResizePanes()
         {
-            foreach (Control item in panesControll.Items)
+            foreach (Control item in PanesControl.Items)
             {
                 item.MaxHeight = tabControl.ActualHeight - 30;
             }
@@ -268,7 +268,7 @@ namespace Suiren
             }
             var pane = new MentionsTimeline(token, this);
             Panes.Add(pane);
-            panesControll.Items.Add(pane);
+            PanesControl.Items.Add(pane);
             ResizePanes();
             ReflectPanesBackground();
             await pane.LoadTimeline();
@@ -335,7 +335,7 @@ namespace Suiren
         /// </summary>
         private void ReflectPanesBackground()
         {
-            foreach (UserControl pane in panesControll.Items)
+            foreach (UserControl pane in PanesControl.Items)
             {
                 pane.Opacity = Setting.Instance.PaneOpacity;
                 var paneType = pane.GetType();
