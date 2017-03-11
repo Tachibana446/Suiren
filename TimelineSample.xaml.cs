@@ -20,6 +20,10 @@ namespace Suiren
 {
     /// <summary>
     /// TimelineSample.xaml の相互作用ロジック
+    /// 
+    /// なぜTimelineSampleという名前なのか？
+    /// →もとはこのクラスを派生して各タイムラインを作りたかった　ができなさそうなのでホームタイムラインになった
+    /// 命名に語弊がある気がする。
     /// </summary>
     public partial class TimelineSample : UserControl, Timeline
     {

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrushPicker"
         mc:Ignorable="d"
-        Title="BrushPickerWindow" Height="345.847" Width="539.069">
+        Title="ブラシ選択" Height="345.847" Width="539.069">
     <WrapPanel Orientation="Vertical">
         <TabControl Height="310" Width="260">
             <TabItem Header="単色">

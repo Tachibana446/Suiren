@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Suiren"
         mc:Ignorable="d"
-        Title="AuthWindow" Height="340.864" Width="475.415">
+        Title="アカウント認証" Height="340.864" Width="475.415">
     <StackPanel>
         <TextBlock>以下のURLにアクセス</TextBlock>
         <Button x:Name="urlButton" Background="White" Click="urlButton_Click">
             <TextBlock Foreground="Blue" x:Name="link"></TextBlock>
         </Button>
         <TextBlock>表示されるPINを入力</TextBlock>
-        <Border Margin="10,0,9.8,0" BorderThickness="2">
+        <Border Margin="0" BorderThickness="2">
             <TextBox x:Name="textBox" Height="24" Width="auto"></TextBox>
         </Border>
         <Button Click="Button_Click">OK</Button>
