@@ -35,6 +35,10 @@
                 <MenuItem Header="ログアウト" x:Name="logoutMenu" Click="logoutMenu_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="設定" Click="SettingMenuItem_Click" />
+            <MenuItem Header="ヘルプ" >
+                <MenuItem Header="バージョン" x:Name="VersionItem"/>
+                <MenuItem Header="ヘルプ" Click="HelpMenuItem_Click"></MenuItem>
+            </MenuItem>
         </Menu>
         <StatusBar x:Name="statusBar" DockPanel.Dock="Bottom">
             <StatusBarItem>

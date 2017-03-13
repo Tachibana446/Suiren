@@ -22,6 +22,8 @@ namespace Suiren
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string Version = "0.1.0";
+
         private OAuth.OAuthSession Session = OAuth.Authorize(Keys.ConsumerKey, Keys.ConsumerSecret);
         private List<Tokens> _tokens = new List<CoreTweet.Tokens>();
         private List<Tokens> Tokens
@@ -54,7 +56,7 @@ namespace Suiren
         {
             InitializeComponent();
             LoadTokens();
-
+            VersionItem.Header = $"バージョン {Version}";
         }
 
         /// <summary>
@@ -350,6 +352,16 @@ namespace Suiren
                 if (Setting.Instance.PaneBrushes.Any(pc => pc.PaneClass == paneType))
                     pane.Background = Setting.Instance.PaneBrushes.First(pc => pc.PaneClass == paneType).Brush;
             }
+        }
+
+        /// <summary>
+        /// ヘルプページを表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HelpMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Setting.Instance.BrowserStart(@"https://github.com/Tachibana446/Suiren/wiki");
         }
     }
 }
