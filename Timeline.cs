@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Suiren
 {
-    interface Timeline
+    public interface Timeline
     {
         /// <summary>
         /// タイムラインのロードくらいはみんな実装するほうが良いよね

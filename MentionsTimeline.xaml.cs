@@ -89,5 +89,15 @@ namespace Suiren
             var toast = new ToastNotification(xml);
             ToastNotificationManager.CreateToastNotifier("Suiren").Show(toast);
         }
+
+        /// <summary>
+        /// このペインを閉じる
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CloseMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            parent.RemovePain(this);
+        }
     }
 }
