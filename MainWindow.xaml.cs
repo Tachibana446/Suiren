@@ -363,5 +363,11 @@ namespace Suiren
         {
             Setting.Instance.BrowserStart(@"https://github.com/Tachibana446/Suiren/wiki");
         }
+
+        public void RemovePain(Timeline pane)
+        {
+            Panes.Remove(pane);
+            PanesControl.Items.Remove(pane);
+        }
     }
 }

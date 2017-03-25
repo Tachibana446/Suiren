@@ -13,6 +13,7 @@
         <Menu DockPanel.Dock="Top" Height="20">
             <MenuItem Header="ロード" x:Name="loadButton" Click="loadButton_Click"></MenuItem>
             <MenuItem x:Name="autoLoad" IsCheckable="True" IsChecked="False" Header="自動更新"></MenuItem>
+            <MenuItem Header="×閉じる" Click="CloseMenuItem_Click"></MenuItem>
         </Menu>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <ItemsControl x:Name="tweetsControl">
