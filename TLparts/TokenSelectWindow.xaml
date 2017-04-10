@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Suiren.TLparts"
         mc:Ignorable="d"
-        Title="使用するアカウントを選択" Height="300" Width="350">
+        Title="使用するアカウントを選択" Height="300" Width="350" Icon="/Suiren;component/170411SuirenIcon.ico">
     <DockPanel>
         <WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Right">
             <WrapPanel.Resources>

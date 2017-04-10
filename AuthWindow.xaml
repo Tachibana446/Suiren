@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Suiren"
         mc:Ignorable="d"
-        Title="アカウント認証" Height="340.864" Width="475.415">
+        Title="アカウント認証" Height="340.864" Width="475.415" Icon="170411SuirenIcon.ico">
     <StackPanel>
         <TextBlock>以下のURLにアクセス</TextBlock>
         <Button x:Name="urlButton" Background="White" Click="urlButton_Click">

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Suiren"
         mc:Ignorable="d"
-        Title="ツイート" Height="368.771" Width="300">
+        Title="ツイート" Height="368.771" Width="300" Icon="170411SuirenIcon.ico">
     <WrapPanel Orientation="Vertical">
         <WrapPanel x:Name="reply" />
         <ComboBox x:Name="comboBox" FontSize="18"></ComboBox>
