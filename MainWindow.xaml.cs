@@ -22,7 +22,7 @@ namespace Suiren
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string Version = "0.1.0";
+        private const string Version = "0.1.1";
 
         private OAuth.OAuthSession Session = OAuth.Authorize(Keys.ConsumerKey, Keys.ConsumerSecret);
         private List<Tokens> _tokens = new List<CoreTweet.Tokens>();

@@ -1,5 +1,6 @@
 # Suiren
-Twitterクライアント
+Twitterクライアント  
+![Logo](./Resources/logo.png)
 
 # ダウンロード
 
